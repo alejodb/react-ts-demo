@@ -2,6 +2,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Counter from './Counter'
+import TodoList from './TodoList'
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
+      </div>
+      <div className="card">
+        <TodoList />
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
