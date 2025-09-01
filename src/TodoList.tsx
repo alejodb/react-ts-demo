@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface Todo {
   id: number;
@@ -7,50 +7,55 @@ interface Todo {
 }
 
 const TodoList: React.FC = () => {
-  const [todos, setTodos] = React.useState<Todo[]>([]);
-  const [newTodo, setNewTodo] = React.useState<string>("");
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [newTodo, setNewTodo] = useState<string>("");
+
+  const handleToggleComplete = (id: number) => {
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const handleDelete = (id: number) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id));
+  };
+
+  const handleAddTodo = () => {
+    if (!newTodo.trim()) return;
+    setTodos(prev => [
+      ...prev,
+      { id: Date.now(), task: newTodo.trim(), completed: false }
+    ]);
+    setNewTodo("");
+  };
 
   return (
     <div>
       <h2>Todo List</h2>
       <ul>
-        {todos.map((todo) => (
+        {todos.map(todo => (
           <li key={todo.id}>
             <input
               type="checkbox"
               checked={todo.completed}
-              onChange={() =>
-                setTodos(
-                  todos.map((t) =>
-                    t.id === todo.id ? { ...t, completed: !t.completed } : t
-                  )
-                )
-              }
+              onChange={() => handleToggleComplete(todo.id)}
             />
             <span>{todo.task}</span>
-            <button onClick={() => setTodos(todos.filter((t) => t.id !== todo.id))}>
-              Delete
-            </button>
+            <button onClick={() => handleDelete(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
+      <label htmlFor="newTodo" style={{ display: "none" }}>New Todo</label>
       <input
+        id="newTodo"
         type="text"
-        placeholder="New Todo"
         value={newTodo}
+        placeholder="New Todo"
         onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={() => {
-        if (newTodo) {
-          setTodos([
-            ...todos,
-            { id: Date.now(), task: newTodo, completed: false },
-          ]);
-          setNewTodo("");
-        }
-      }}>
-        Add Todo
-      </button>
+      <button onClick={handleAddTodo}>Add Todo</button>
     </div>
   );
 };

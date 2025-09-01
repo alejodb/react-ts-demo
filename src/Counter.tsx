@@ -3,12 +3,18 @@ import React, { useState } from 'react';
 const Counter: React.FC = () => {
   const [count, setCount] = useState<number>(0);
 
+  const handleIncrement = () => setCount(prev => prev + 1);
+  const handleDecrement = () => setCount(prev => prev - 1);
+  const handleReset = () => setCount(0);
+
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => setCount(count - 1)}>Decrement</button>
-      <button onClick={() => setCount(0)}>Reset</button>
+      <div>
+        <button onClick={handleIncrement}>Increment</button>
+        <button onClick={handleDecrement}>Decrement</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
     </div>
   );
 };
