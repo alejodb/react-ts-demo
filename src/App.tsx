@@ -1,8 +1,11 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Counter from './Counter'
-import TodoList from './TodoList'
+import Counter from './components/Counter/Counter'
+import TodoList from './components/TodoList/TodoList'
+import RenderCounter from './components/RenderCounter/RenderCounter'
+import Timer from './components/Timer/Timer'
+import NamesList from './components/NamesList/NamesList'
 
 function App() {
 
@@ -25,6 +28,15 @@ function App() {
       </div>
       <div className="card">
         <TodoList />
+      </div>
+      <div className="card">
+        <RenderCounter />
+      </div>
+      <div className="card">
+        <Timer />
+      </div>
+      <div className="card">
+        <NamesList />
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
