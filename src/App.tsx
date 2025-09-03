@@ -1,48 +1,48 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Counter from './components/Counter/Counter'
-import TodoList from './components/TodoList/TodoList'
-import RenderCounter from './components/RenderCounter/RenderCounter'
-import Timer from './components/Timer/Timer'
-import NamesList from './components/NamesList/NamesList'
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import Login from "./features/Login";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import "./App.css";
+import Perfil from "./features/Perfil";
+
+const AppRedux = lazy(() => import("./features/AppRedux"));
+const AppRTK = lazy(() => import("./features/AppRTK"));
+const AppBase = lazy(() => import("./features/AppBase"));
 
 function App() {
-
+  const isAuth = false;
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <BrowserRouter>
+      <div className="app-container">
+        <nav>
+          <Link to="/">Inicio</Link>
+          <Link to="/app">Ejemplos básicos</Link>
+          <Link to="/appRedux">Ejemplos Redux</Link>
+          <Link to="/appRTK">Ejemplos RTK</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/perfil">Perfil</Link>
+        </nav>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="main-content">
+         <Suspense fallback={<p>Cargando página...</p>}>
+          <Routes>
+            <Route path="/app" element={<AppBase />} />
+              <Route path="/appRedux" element={<AppRedux />} />
+             <Route path="/appRTK" element={<AppRTK />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/perfil"
+              element={
+                <PrivateRoute isAuth={isAuth}>
+                  <Perfil />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
       </div>
-      <div className="card">
-        <TodoList />
-      </div>
-      <div className="card">
-        <RenderCounter />
-      </div>
-      <div className="card">
-        <Timer />
-      </div>
-      <div className="card">
-        <NamesList />
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

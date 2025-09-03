@@ -40,3 +40,44 @@
 .read-the-docs {
   color: #888;
 }
+
+
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+  background: #1976d2;
+  padding: 1rem 2rem;
+  color: white;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #90caf9;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
