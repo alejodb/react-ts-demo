@@ -81,3 +81,16 @@ nav a:hover {
   padding: 2rem;
   overflow-y: auto;
 }
+
+.suspense-fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  font-size: 2rem;
+  color: #1976d2;
+  background: #e3f2fd;
+  border-radius: 8px;
+  margin: 2rem 0;
+  font-weight: bold;
+}

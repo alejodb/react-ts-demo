@@ -5,6 +5,8 @@ import TodoList from '../components/TodoList/TodoList'
 import RenderCounter from '../components/RenderCounter/RenderCounter'
 import Timer from '../components/Timer/Timer'
 import NamesList from '../components/NamesList/NamesList'
+import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary'
+import BuggyComponent from '../components/BuggyComponent/BuggyComponent'
 
 function AppBase() {
 
@@ -36,6 +38,11 @@ function AppBase() {
       </div>
       <div className="card">
         <NamesList />
+      </div>
+      <div className="card">
+        <ErrorBoundary fallback={<p style={{ border: '2px solid red', padding: '10px' }}>¡Vaya! Algo salió mal en este componente.</p>}>
+          <BuggyComponent />
+        </ErrorBoundary>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
