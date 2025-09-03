@@ -1,13 +1,13 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import Login from "./features/Login";
+import Login from "./pages/Login";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import "./App.css";
-import Perfil from "./features/Perfil";
+import Perfil from "./pages/Perfil";
 
-const AppRedux = lazy(() => import("./features/AppRedux"));
-const AppRTK = lazy(() => import("./features/AppRTK"));
-const AppBase = lazy(() => import("./features/AppBase"));
+const AppRedux = lazy(() => import("./pages/AppRedux"));
+const AppRTK = lazy(() => import("./pages/AppRTK"));
+const AppBase = lazy(() => import("./pages/AppBase"));
 
 function App() {
   const isAuth = false;
